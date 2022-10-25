@@ -2,17 +2,17 @@ package was;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import was.calculate.NewCalculator;
-import was.calculate.PositiveNumber;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.charset.StandardCharsets;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class CustomWepApplicationServer {
 
     private final int port;
+    private final ExecutorService executorService = Executors.newFixedThreadPool(10);
     private static final Logger logger = LoggerFactory.getLogger(CustomWepApplicationServer.class);
 
     public CustomWepApplicationServer(int port) {
@@ -31,34 +31,13 @@ public class CustomWepApplicationServer {
 
                 /**
                  * Step1 - 사용자 요청을 메인 Thread가 처리하도록 한다.
+                 * 단일 메인 쓰레드에서 처리, 다중 처리 불가
                  */
+                /*
                 try (InputStream inputStream = clientSocket.getInputStream(); OutputStream outputStream = clientSocket.getOutputStream()) {
                     BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
                     DataOutputStream dataOutputStream = new DataOutputStream(outputStream);
 
-                    /*
-                    String line;
-                    while((line = bufferedReader.readLine()) != "") {
-                        System.out.println(line);
-                        *//**
-                         * line Http Protocol
-                         * GET /calculate?operand1=11&operator=*&operand2=55 HTTP/1.1
-                         * Host: localhost:8080
-                         * Connection: Keep-Alive
-                         * User-Agent: Apache-HttpClient/4.5.13 (Java/11.0.13)
-                         * Accept-Encoding: gzip,deflate
-                         *
-                         * HttpRequest
-                         *  - RequestLine (GET /calculate?operand1=11&operator=*&operand2=55 HTTP/1.1)
-                         *      - HttpMethod
-                         *      - path
-                         *      - queryString
-                         *  - Header
-                         *  - BlankLine
-                         *  - Body
-                         *//*
-                    }
-                    */
 
                     HttpRequest httpRequest = new HttpRequest(bufferedReader);
 
@@ -76,8 +55,20 @@ public class CustomWepApplicationServer {
                         httpResponse.response200Header("application/json", body.length);
                         httpResponse.responseBody(body);
                     }
+                  }
+                */
 
-                }
+                /**
+                 * Step2 - 사용자 요청이 들어올 때마다 Thread를 새로 생성해서 사용자 요청을 처리하도록 한다.
+                 * 요청이 많아 질수록 계속해서 쓰레드를 생성하여 자원을 많이 소모한다.
+                 * CPU 컨텍스트 스위칭 횟수, 메모리 사용량, 서버 리소스 초과 등의 문제가 발생할 수 있다.
+                 */
+                // new Thread(new ClientRequestHandler(clientSocket)).start();
+
+                /**
+                 * Step3 - Thread Pool을 적용해 안정적인 서비스가 가능하도록 한다.
+                 */
+                executorService.execute(new Thread(new ClientRequestHandler(clientSocket)));
             }
         }
     }
