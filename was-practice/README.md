@@ -34,3 +34,8 @@
 - Header
 - BlankLine
 - Body
+
+### 👉 Servlet Programming
+#### 1️⃣ CGI (Common Gateway Interface)
+- 서버와 어플리케이션 사이에 데이터를 주고 받는 규약
+- 컴파일 방식(C,C++,Java 등) / 인터프리터 방식(PHP,Python 등)
