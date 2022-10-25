@@ -6,6 +6,16 @@
 - Thread Pool을 적용해 안정적인 서비스가 가능하도록 한다
 <br>
 
+## 🧰 Library Usage
+- Junit5 
+  - version 5.9.0
+- AssertJ : 테스트 코드 가독성을 높여주는 자바 라이브러리
+  - version 5.9.0
+- Logback : 로그를 기록하기 위한 SLF4J의 구현체
+  - version 1.4.4
+
+<br>
+
 ## 📓 Study Summary
 ### 👉 HTTP 프로토콜 이해
 서버와 클라이언트가 웹에서 데이터를 주고받기 위한 통신 규약
