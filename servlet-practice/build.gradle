@@ -1,5 +1,4 @@
 plugins {
-    id 'war'
     id 'java'
 }
 
@@ -7,7 +6,6 @@ group 'org.example'
 version '1.0-SNAPSHOT'
 
 repositories {
-    mavenCentral()
     mavenCentral()
 }
 
