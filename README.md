@@ -8,3 +8,5 @@
 - :pushpin: [**Servlet**](https://github.com/VenusIM/BE_STPs/tree/master/servlet-practice)
 
 - :pushpin: [**JDBC**](https://github.com/VenusIM/BE_STPs/tree/master/jdbc-practice)
+
+- :pushpin: [**MVC**](https://github.com/VenusIM/BE_STPs/tree/master/mvc-practice)
