@@ -11,4 +11,4 @@
 
 - :pushpin: [**MVC**](https://github.com/VenusIM/BE_STPs/tree/master/mvc-practice)
 
-- :pushpin: [**BoardPJT**](https://github.com/VenusIM/BE_STPs/tree/master/board-practice)   
+- :pushpin: [**BoardPJT**](https://github.com/VenusIM/BE_STPs/tree/master/board-practice-basic)   
